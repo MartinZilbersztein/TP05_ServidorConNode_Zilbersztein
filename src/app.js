@@ -7,12 +7,15 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.json('¡Hola, y bienvenido a un servidor express con Node!');
 });
-app.get('/hora', (req, res) => {
-    res.send(ObtenerHora())
+app.get('/hora', (req, res, next) => {
+    res.status(200).send(ObtenerHora());
 });
 app.get('/fecha-completa', (req, res) => {
-    res.send(time.toDateString() + " " +  time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+    res.status(200).send(ObtenerFechaCompleta());
 });
-
+app.use(function(error, request, response, next) {
+    // Handle the error
+    response.status(500).send('Internal Server Error');
+});
 //para el extra: middleware
 export default app;
