@@ -17,5 +17,8 @@ app.use(function(error, request, response, next) {
     // Handle the error
     response.status(500).send('Internal Server Error');
 });
+app.use(req, res, next => {
+    return res.status(404).send(`<img src="https://http.cat/images/404.jpg">`);
+})
 //para el extra: middleware
 export default app;
